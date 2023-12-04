@@ -2,7 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image  } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
+import * as Progress from 'react-native-progress';
+import { ProgressBarAndroidBase } from "react-native";
 
 
 export const Perfil = () => {
@@ -24,20 +26,41 @@ export const Perfil = () => {
 
     return (
 
+        
+
            
-        <LinearGradient colors={['#E1F2E0', '#8DDCE5', '#114A55']} style={styles.container}>
-            <View style= {styles.topContent}>
-            <Text style={styles.texto1}>Bem estar em </Text>
-            <Text style={styles.numero2}>5</Text>
+        <LinearGradient colors={['#005227', '#8DDCE5', '#a4fff7']} style={styles.container}>
+
+            <View style={styles.imagemcont}>
+                <Image
+                     source={require('../../assets/perfil.png')}
+                         style={styles.imagem}
+                 />
+                </View>
+
+            <View>
+
+                <View>
+                    <Text style={styles.meta}>Meta do dia: </Text>
+                </View>
+                <View>
+                    <Text style={styles.metaStatus}>Status</Text>
+                </View>
+
+                <View>
+                    <Text style={styles.metaok}>0/6 </Text>
+                </View>
+                
+               
+            
             </View>
+            
             <View style={styles.iniciarContainer}>
             <TouchableOpacity  onPress={() => navigate('Tarefas')}>
                 <Text style={styles.iniciar}>Começar</Text>
             </TouchableOpacity>
             </View>
-            <View style={styles.imageContainer}>
-                <Image style={styles.image} source={imagePath}/>
-            </View>
+           
            
         </LinearGradient>
        
@@ -50,6 +73,25 @@ const styles = StyleSheet.create({
         flex: 1,
         
          // para centralizar o conteúdo
+    },
+    meta:{
+        fontSize: 50,
+        color: '#000',
+        fontFamily: 'Roboto'
+    },
+    metaok:{
+        marginTop: 50,
+        fontSize: 50,
+        color: '#000',
+        fontFamily: 'Roboto',
+        alignSelf:'center'
+    },
+    metaStatus:{
+        alignSelf:"center",
+        marginTop: 30,
+        fontSize: 25,
+        color: '#000',
+        fontFamily: 'Roboto'
     },
     topContent:{
         flex: 1,
@@ -71,7 +113,8 @@ const styles = StyleSheet.create({
     iniciarContainer: {
        
         justifyContent: 'flex-end',
-        alignItems: 'center', // Para centralizar horizontalmente
+        alignItems: 'center',
+        marginTop: 150, // Para centralizar horizontalmente
         marginBottom: 120, // Espaço na parte inferior
         borderWidth: 3,
         borderColor: '#8DDCE5',
@@ -84,6 +127,18 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color:'#114A55'
         
+    },
+    imagem: {
+        borderRadius: 100,
+        width: 200,
+        height: 200,
+
+    },
+    imagemcont:{
+        paddingTop: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 20,
     }
 });
 

@@ -1,34 +1,35 @@
 import React from "react";
-import {View, Text, StyleSheet, Image, TouchableOpacity} from "react-native";
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 
-export default function Welcome() {
+const image = '../../assets/paisagem.jpg';
 
-        const navigation = useNavigation();
+export default function Welcome() {
+    const navigation = useNavigation();
+
+
 
     return (
+
         <View style={styles.container}>
-            <View>
-                <Text>Bem vindo</Text>
-            </View>
-            <View 
-            style={styles.containerForm}
-            >
-            <TouchableOpacity
-            onPress={() => {navigation.navigate('Login')}}
-            
-            >
-
-                <Text style={styles.button}>Acessar</Text>
+            <ImageBackground
+                source={require('../../assets/paisagem.jpeg')}
+                style={styles.imageBackground}
+            >       <View style={styles.bemvn}>
+                    <Text style={styles.bemvindotext}>Bem estar em </Text>
+                    <Text style={styles.numero2}>5</Text>
+                    </View>
+                    <TouchableOpacity
+                        onPress={() => { navigation.navigate('Login') }}
+                        style={styles.button}
+                    >
+                        <Text style={styles.buttontxt}>Acessar</Text>
+                    </TouchableOpacity>
                 
-            </TouchableOpacity>
-            </View>
-            
-
-
-
+            </ImageBackground>
         </View>
+
     )
 }
 
@@ -38,24 +39,59 @@ export default function Welcome() {
 
 
 const styles = StyleSheet.create({
-    container:{
-
+    imageBackground: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center",
+        width: '100%',
+        height: '100%'
     },
-    containerForm:{
+    container: {
+        flex: 1,
+    },
+    numero2: {
+        fontFamily: 'Roboto',
+        fontSize: 55, // Ajuste conforme necessário
+        color: '#FFF', // Ajuste a cor conforme necessário,
+        alignSelf: 'center'
+    },
+    bemvindotext: {
+        fontFamily: 'Roboto',
+        fontSize: 55, // Ajuste conforme necessário
+        color: '#FFF', // Ajuste a cor conforme necessário
+        alignSelf: 'center'
+    },
+    contBem: {
+        backgroundColor: '#FFF'
+    },
+    containerForm: {
         flex: 1,
         backgroundColor: '#FFF',
         paddingStart: '5%',
-        paddingEnd: '5%'
+        paddingEnd: '5%',
+
     },
-    button:{
-        position:'absolute',
+    button: {
         backgroundColor: '#38a69d',
-        borderRadius: 50,
-        paddingVertical: 8,
-        width: '60%',
-        alignSelf: 'center',
-        bottom: '15%'
+        width: '100%',
+        borderRadius: 100,
+        marginTop: 14,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+    },
+
+    buttontxt: {
+        justifyContent:'center',
+        color: '#FFF',
+        fontSize: 20,
+        fontFamily: 'Roboto'
+
+    },
+    bemvn:{
+        paddingBottom: 400
     }
+
 })
 
 

@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Text, View, Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Progress from 'react-native-progress';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from "expo-linear-gradient";
+import { CheckBox } from 'react-native-web';
 
 export const Tarefas = () => {
+    const navigation = useNavigation();
+
+
     const [seconds, setSeconds] = useState(0);
     const [isActive, setIsActive] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
@@ -49,16 +56,41 @@ export const Tarefas = () => {
     const formatTime = (totalSeconds) => {
         const mins = Math.floor(totalSeconds / 60);
         const secs = totalSeconds % 60;
-        return `${mins}:${secs < 10 ? '0' : ''}${secs};`
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     };
 
     const progress = seconds / maxTime;
 
     return (
+
+
         <View style={styles.mainContainer}>
-            <View style={styles.imageContainer}>
-                <Image style={styles.image} source={require('../../assets/perfil.png')}/>
+            <LinearGradient colors={['#03bb85', '#8DDCE5', '#a4fff7']} style={styles.container}>
+            <View style={styles.backcont}>
+
+                <TouchableOpacity
+
+                    onPress={() => { navigation.navigate('Perfil') }}
+
+
+                >
+                    <Text>
+                        Back
+                    </Text>
+                </TouchableOpacity>
+
             </View>
+
+
+
+            <View style={styles.imageContainer}>
+                <Image style={styles.image} source={require('../../assets/perfil.png')} />
+            </View>
+
+
+
+
+
             <View style={styles.objectives}>
                 <Text style={styles.objectivesText}>Objetivos</Text>
             </View>
@@ -87,7 +119,8 @@ export const Tarefas = () => {
                     <Icon name="street-view" size={30} color="#000" />
                     <Text style={styles.taskText}>Caminhar</Text>
                 </TouchableOpacity>
-                
+
+
             </View>
             {currentTask && (
                 <View style={styles.progressBarContainer}>
@@ -100,8 +133,13 @@ export const Tarefas = () => {
                     <Button title={isPaused ? "Retomar" : "Pausar"} onPress={handlePause} />
                 )}
                 <Button title="Parar" onPress={handleStop} disabled={!isActive} />
+
             </View>
-        </View>
+        </LinearGradient>
+
+            
+        </View >
+        
     );
 };
 
@@ -110,8 +148,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20,
         backgroundColor: '#f5f5f5',
+    },
+    container:{
+        flex: 1,
+        width: 'auto',
+        height: 'auto'
     },
     imageContainer: {
         justifyContent: 'center',
@@ -143,10 +185,10 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     taskButton: {
-       borderRadius:800,
-        width:90,
+        borderRadius: 800,
+        width: 90,
         borderColor: '#8DDCE5',
-        backgroundColor: '#8DDCE5',
+        backgroundColor: '#FFF',
         alignItems: 'center',
         marginHorizontal: 10,
         marginBottom: 10,
@@ -165,6 +207,18 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#333',
         marginTop: 10,
+    },
+    backcont: {
+        backgroundColor: '#CCC',
+        alignSelf: 'flex-start',
+        padding: 10,
+        borderRadius: 25
+    },
+    container: {
+        alignItems: 'center',
+        flex: 1,
+
+        // para centralizar o conteúdo
     },
 });
 
